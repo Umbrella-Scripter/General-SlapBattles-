@@ -8,7 +8,7 @@ GeneralAnticheatBypass = hookmetamethod(game, "__namecall", function(self, ...)
    elseif getnamecallmethod() == "FireServer" and tostring(self) == "AdminGUI" then
        return
 	end
-   return Namecall(self, ...)
+   return GeneralAnticheatBypass(self, ...)
 end)
 
 -- for mastery glove farm hub :3 (idk if people say i use chat GPT to code those line because it have comments:< )
