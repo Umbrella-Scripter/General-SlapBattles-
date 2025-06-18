@@ -18,7 +18,7 @@ local GlovelEvent = game:GetService("ReplicatedStorage"):FindFirstChild("General
 local HookGlovel
 HookGlovel = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
-    if not checkcaller() and self == GlovelEvent and method == "FireServer" and _G.GlovelCritInf then
+    if not checkcaller() and self == GlovelEvent and getnamecallmethod() == "FireServer" and _G.GlovelCritInf then
         args[2] = true
         return HookGlovel(self,unpack(args))
     end
@@ -30,7 +30,7 @@ local BrickEvent = game:GetService("ReplicatedStorage"):FindFirstChild("lbrick")
 local HookBrick
 HookBrick = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
-    if not checkcaller() and self == BrickEvent and method == "FireServer" and _G.PreventBrickSpawn and not args then
+    if not checkcaller() and self == BrickEvent and getnamecallmethod() == "FireServer" and _G.PreventBrickSpawn and not args[1] then
 	pcall(function() game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = tonumber(game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text) - 1 end)
         return
     end
