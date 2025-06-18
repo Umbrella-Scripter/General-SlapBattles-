@@ -30,8 +30,8 @@ local BrickEvent = game:GetService("ReplicatedStorage"):FindFirstChild("lbrick")
 local HookBrick
 HookBrick = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
-    if not checkcaller() and self == BrickEvent and method == "FireServer" and _G.PreventBrickSpawn and args[1] == nil then
-	pcall(function() game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = tonumber(game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text) - 10 end) -- you know what it does :3
+    if not checkcaller() and self == BrickEvent and method == "FireServer" and _G.PreventBrickSpawn and not args[1] then
+	pcall(function() game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = tonumber(game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text) - 10 end)
         return
     end
     return HookBrick(self,...)
