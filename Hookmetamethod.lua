@@ -31,7 +31,7 @@ local HookBrick
 HookBrick = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
     if not checkcaller() and self == BrickEvent and method == "FireServer" and _G.PreventBrickSpawn and not args[1] then
-	pcall(function() game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = tonumber(game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text) - 10 end)
+	pcall(function() game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text = tonumber(game:GetService("Players").LocalPlayer.PlayerGui.BRICKCOUNT.ImageLabel.TextLabel.Text) - 1 end)
         return
     end
     return HookBrick(self,...)
