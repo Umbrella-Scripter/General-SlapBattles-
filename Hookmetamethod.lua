@@ -1,6 +1,6 @@
 -- Anticheat bypass
-local Namecall
-Namecall = hookmetamethod(game, "__namecall", function(self, ...)
+local GeneralAnticheatBypass
+GeneralAnticheatBypass = hookmetamethod(game, "__namecall", function(self, ...)
    if getnamecallmethod() == "FireServer" and tostring(self) == "Ban" then
        return
    elseif getnamecallmethod() == "FireServer" and tostring(self) == "WalkSpeedChanged" then
@@ -11,16 +11,27 @@ Namecall = hookmetamethod(game, "__namecall", function(self, ...)
    return Namecall(self, ...)
 end)
 
+-- for mastery glove farm hub :3 (idk if people say i use chat GPT to code those line because it have comments:< )
 if not Extra_Hookmentamethod_Gloves then return end
-local oldRemoteglovel = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit")
-local namecallglovel
 
-namecallglovel = hookmetamethod(game,"__namecall",function(self,...)
+local GlovelEvent = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit")
+local HookGlovel
+HookGlovel = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
-    local method = getnamecallmethod():lower()
-    if not checkcaller() and self == oldRemoteglovel and method == "fireserver" and _G.GlovelCritInf then
+    if not checkcaller() and self == GlovelEvent and method == "FireServer" and _G.GlovelCritInf then
         args[2] = true
-        return namecallglovel(self,unpack(args))
+        return HookGlovel(self,unpack(args))
     end
-    return namecallglovel(self,...)
+    return HookGlovel(self,...)
+end)
+
+-- This is for dumbass people who cannot wait and keep spamming ability without brain to active anti cheat to kick themselves and bark it's my fault >:(
+local BrickEvent = game:GetService("ReplicatedStorage"):FindFirstChild("lbrick")
+local HookBrick
+HookBrick = hookmetamethod(game,"__namecall",function(self,...)
+    local args = {...}
+    if not checkcaller() and self == BrickEvent and method == "FireServer" and _G.PreventBrickSpawn and args[1] == nil then
+        return
+    end
+    return HookBrick(self,...)
 end)
