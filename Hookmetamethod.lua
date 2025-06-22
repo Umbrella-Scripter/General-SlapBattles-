@@ -21,7 +21,8 @@ local Events = {
 }
 
 local Hook = hookmetamethod(game, "__namecall", function(self, ...)
-    local args, method = {...}, getnamecallmethod()
+    local args = {...}
+local method = getnamecallmethod()
     
     if not checkcaller() and method == "FireServer" then
         if self == Events.Glovel and _G.GlovelCritInf then
