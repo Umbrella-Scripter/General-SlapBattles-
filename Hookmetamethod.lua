@@ -20,26 +20,34 @@ local Events = {
     Phase = game:GetService("ReplicatedStorage"):FindFirstChild("PhaseA")
 }
 
+local Events = {
+    Glovel = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit"),
+    Brick = game:GetService("ReplicatedStorage"):FindFirstChild("lbrick"),
+    Phase = game:GetService("ReplicatedStorage"):FindFirstChild("PhaseA")
+}
+
 local Hook = hookmetamethod(game, "__namecall", function(self, ...)
     local args = {...}
-local method = getnamecallmethod()
-    
-    if not checkcaller() and method == "FireServer" then
-        if self == Events.Glovel and _G.GlovelCritInf then
+    local method = getnamecallmethod()
+
+    local isTargetEvent = (Events.Glovel and self == Events.Glovel) 
+        or (Events.Brick and self == Events.Brick) 
+        or (Events.Phase and self == Events.Phase)
+
+    if not checkcaller() and method == "FireServer" and isTargetEvent then
+        if Events.Glovel and self == Events.Glovel and _G.GlovelCritInf then
             args[2] = true
             return Hook(self, unpack(args))
-        elseif #args == 0 then
-            if self == Events.Brick and _G.PreventBrickSpawn then
-                pcall(function()
-                    local gui = game.Players.LocalPlayer.PlayerGui.BRICKCOUNT
-                    gui.ImageLabel.TextLabel.Text -= 1
-                end)
-                return
-            elseif self == Events.Phase and _G.PreventPhaseAbility then
-                return
-            end
+        elseif Events.Brick and self == Events.Brick and _G.PreventBrickSpawn and #args == 0 then
+            pcall(function()
+                local gui = game.Players.LocalPlayer.PlayerGui.BRICKCOUNT
+                gui.ImageLabel.TextLabel.Text -= 1
+            end)
+            return
+        elseif Events.Phase and self == Events.Phase and _G.PreventPhaseAbility and #args == 0 then
+            return
         end
     end
+
     return Hook(self, ...)
 end)
-
