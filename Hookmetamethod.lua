@@ -11,7 +11,7 @@ GeneralAnticheatBypass = hookmetamethod(game, "__namecall", function(self, ...)
    return GeneralAnticheatBypass(self, ...)
 end)
 
--- for mastery glove farm hub (idk if people say i use chat GPT to code those line because it have comments:< )
+-- for mastery glove farm hub :3 (idk if people say i use chat GPT to code those line because it have comments:< )
 if not Extra_Hookmentamethod_Gloves then return end
 
 local GlovelEvent = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit")
@@ -45,4 +45,34 @@ HookPhase = hookmetamethod(game,"__namecall",function(self,...)
 		return
 	end 
     return HookPhase(self,...)
+end)
+
+local BusEvent = game:GetService("ReplicatedStorage"):FindFirstChild("busmoment")
+local HookBus
+HookBus = hookmetamethod(game,"__namecall",function(self,...)
+    local args = {...}
+    if not checkcaller() and self == BusEvent and getnamecallmethod() == "FireServer" and _G.BusPreventSpawn and #args == 0 then
+		return
+	end 
+    return HookBus(self,...)
+end)
+
+local WellEvent = game:GetService("ReplicatedStorage"):FindFirstChild("Well")
+local HookWell
+HookWell = hookmetamethod(game,"__namecall",function(self,...)
+    local args = {...}
+    if not checkcaller() and self == WellEvent and getnamecallmethod() == "FireServer" and _G.PreventWellSpawn and #args == 0 then
+		return
+	end 
+    return HookWell(self,...)
+end)
+
+local ObbyEvent = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralAbility")
+local HookObby
+HookObby = hookmetamethod(game,"__namecall",function(self,...)
+    local args = {...}
+    if not checkcaller() and self == ObbyEvent and getnamecallmethod() == "FireServer" and _G.PreventObbySpawn and #args == 2 and args[2] == 1 then
+		return
+	end 
+    return HookObby(self,...)
 end)
