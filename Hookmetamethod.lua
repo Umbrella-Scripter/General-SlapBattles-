@@ -15,6 +15,7 @@ end)
 if not Extra_Hookmentamethod_Gloves then return end
 
 local GlovelEvent = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit")
+if GlovelEvent then
 local HookGlovel
 HookGlovel = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
@@ -24,10 +25,12 @@ HookGlovel = hookmetamethod(game,"__namecall",function(self,...)
     end
     return HookGlovel(self,...)
 end)
+end
 
 -- This is for dumbass people who cannot wait and keep spamming ability without brain to active anti cheat to kick themselves and bark it's my fault >:(
 local BrickEvent = game:GetService("ReplicatedStorage"):FindFirstChild("lbrick")
 local HookBrick
+if BrickEvent then
 HookBrick = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
     if not checkcaller() and self == BrickEvent and getnamecallmethod() == "FireServer" and _G.PreventBrickSpawn and #args == 0 then
@@ -36,9 +39,11 @@ HookBrick = hookmetamethod(game,"__namecall",function(self,...)
     end
     return HookBrick(self,...)
 end)
+end
 
 local PhaseEvent = game:GetService("ReplicatedStorage"):FindFirstChild("PhaseA")
 local HookPhase
+if PhaseEvent then
 HookPhase = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
     if not checkcaller() and self == PhaseEvent and getnamecallmethod() == "FireServer" and _G.PreventPhaseAbility and #args == 0 then
@@ -46,9 +51,12 @@ HookPhase = hookmetamethod(game,"__namecall",function(self,...)
 	end 
     return HookPhase(self,...)
 end)
+end
+
 
 local BusEvent = game:GetService("ReplicatedStorage"):FindFirstChild("busmoment")
 local HookBus
+if BusEvent then
 HookBus = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
     if not checkcaller() and self == BusEvent and getnamecallmethod() == "FireServer" and _G.BusPreventSpawn and #args == 0 then
@@ -56,9 +64,11 @@ HookBus = hookmetamethod(game,"__namecall",function(self,...)
 	end 
     return HookBus(self,...)
 end)
+end
 
 local WellEvent = game:GetService("ReplicatedStorage"):FindFirstChild("Well")
 local HookWell
+if WellEvent then
 HookWell = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
     if not checkcaller() and self == WellEvent and getnamecallmethod() == "FireServer" and _G.PreventWellSpawn and #args == 0 then
@@ -66,9 +76,11 @@ HookWell = hookmetamethod(game,"__namecall",function(self,...)
 	end 
     return HookWell(self,...)
 end)
+end
 
 local ObbyEvent = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralAbility")
 local HookObby
+if ObbyEvent then
 HookObby = hookmetamethod(game,"__namecall",function(self,...)
     local args = {...}
     if not checkcaller() and self == ObbyEvent and getnamecallmethod() == "FireServer" and _G.PreventObbySpawn and #args == 2 and args[2] == 1 then
@@ -76,3 +88,4 @@ HookObby = hookmetamethod(game,"__namecall",function(self,...)
 	end 
     return HookObby(self,...)
 end)
+end
