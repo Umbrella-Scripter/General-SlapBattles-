@@ -15,6 +15,12 @@ end)
 -- for mastery glove farm hub :3 (idk if people say i use chat GPT to code those line because it have comments:< )
 if not Extra_Hookmentamethod_Gloves then return end
 
+_G.GlovelCritInf = false
+_G.PreventPhaseAbility = false
+_G.PreventBrickSpawn = false
+_G.BusPreventSpawn = false
+_G.PreventWellSpawn = false
+_G.PreventObbySpawn = false
 local GlovelEvent = game:GetService("ReplicatedStorage"):FindFirstChild("GeneralHit")
 if GlovelEvent then
 local HookGlovel
