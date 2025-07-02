@@ -1,3 +1,4 @@
+if not hookmetamethod then return end
 -- Anticheat bypass
 local GeneralAnticheatBypass
 GeneralAnticheatBypass = hookmetamethod(game, "__namecall", function(self, ...)
